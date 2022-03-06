@@ -10,6 +10,7 @@ pipeline {
         registry = "gsharma13/regappuser"
         registryCredential = 'docker-hub-credentials'
         dockerImage = ''
+        dockerRun = ''
     }
 
     agent {  
@@ -43,6 +44,13 @@ pipeline {
                     }
                 }
             } 
+        }
+        stage('Deploy to dev - create a container') { 
+            steps { 
+                script { 
+                    dockerRun = 'docker run -d --name regaappuser -p 8086:8080 gsharma13/regappuser:$BUILD_NUMBER'
+                }
+            }
         }
     }
     post{
