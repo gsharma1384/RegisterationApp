@@ -46,10 +46,11 @@ pipeline {
             } 
         }
         stage('Deploy to dev - create a container') { 
-            steps { 
-                script { 
-                    dockerRun = 'docker run -d --name regaappuser -p 8086:8080 gsharma13/regappuser:$BUILD_NUMBER'
-                }
+            steps {
+                sh 'docker run -d --name regaappuser -p 8086:8080 gsharma13/regappuser:'+$BUILD_NUMBER
+                //script { 
+                  //  dockerRun = 'docker run -d --name regaappuser -p 8086:8080 gsharma13/regappuser:'+$BUILD_NUMBER
+                //}
             }
         }
     }
