@@ -48,8 +48,8 @@ pipeline {
         stage('Deploy to dev - create a container') { 
             steps {
                 echo "Docker Image Tag Name: ${dockerImageTag}"
-		        sh "docker stop gsharma13/regappuser"
-		        sh "docker rm gsharma13/regappuser"
+		        sh "docker stop gsharma13/regappuser:${env.BUILD_NUMBER}"
+		        sh "docker rm gsharma13/regappuser:${env.BUILD_NUMBER}"
 		        sh "docker run -d --name regaappuser -p 8086:8080 gsharma13/regappuser:${env.BUILD_NUMBER}"
             }
         }
