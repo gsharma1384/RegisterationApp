@@ -7,7 +7,7 @@ Purpose: Assignment 2(Build a Docker Jenkins Pipeline to Implement CI/CD Workflo
 */
 pipeline {
     environment {
-        registry = "gsharma13/regapp"
+        registry = "gsharma13/regappuser"
         registryCredential = 'docker-hub-credentials'
         dockerImage = ''
     }
