@@ -20,7 +20,7 @@ pipeline {
         maven 'mvn3.8.3'
         jdk 'JDK11'
     }
-    
+
     stages{
         stage('Build Artefacts') {
             steps{
@@ -42,4 +42,3 @@ pipeline {
         }
     }
 }
-
