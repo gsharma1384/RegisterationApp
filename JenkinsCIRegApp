@@ -10,7 +10,7 @@ pipeline {
         registry = "gsharma13/regappuser"
         registryCredential = 'docker-hub-credentials'
         dockerImage = ''
-        dockerRun = ''
+        dockerImageTag = "gsharma13/regappuser:${env.BUILD_NUMBER}"
     }
 
     agent {  
@@ -47,10 +47,10 @@ pipeline {
         }
         stage('Deploy to dev - create a container') { 
             steps {
-                sh 'docker run -d --name regaappuser -p 8086:8080 gsharma13/regappuser:'+$BUILD_NUMBER
-                //script { 
-                  //  dockerRun = 'docker run -d --name regaappuser -p 8086:8080 gsharma13/regappuser:'+$BUILD_NUMBER
-                //}
+                echo "Docker Image Tag Name: ${dockerImageTag}"
+		        sh "docker stop gsharma13/regappuser"
+		        sh "docker rm gsharma13/regappuser"
+		        sh "docker run -d --name regaappuser -p 8086:8080 gsharma13/regappuser:${env.BUILD_NUMBER}"
             }
         }
     }
