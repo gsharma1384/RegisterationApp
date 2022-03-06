@@ -1,2 +1,1 @@
-# RegisterationApp
-This is registeration app for new devops users
+## Registeration Application for New Devops Users

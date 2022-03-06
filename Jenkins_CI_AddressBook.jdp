@@ -1,0 +1,48 @@
+/*
+====================================================================================
+Author: Gaurav Shatrma
+Date: 06-02-2022
+Purpose: Assignment 2(Build a Docker Jenkins Pipeline to Implement CI/CD Workflow.)
+====================================================================================
+*/
+pipeline {
+    agent { 
+        node { 
+            label 'master' 
+        } 
+    }
+    tools{
+        maven 'mvn3.8.3'
+        jdk 'JDK11'
+    }
+    stages{
+        stage('Code Validate') {
+            steps{
+             sh 'mvn validate'
+            }
+        }
+        stage('Code Compile'){
+            steps{
+                sh 'mvn compile'
+            }
+        }
+        stage('Code Test'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+        stage('Code Package'){
+            steps{
+                sh 'mvn package'
+            }
+        }
+    }
+    post{
+        always {
+            dir("${env.WORKSPACE}@tmp"){
+                deleteDir()
+            }
+        }
+    }
+}
+
